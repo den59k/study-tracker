@@ -1,0 +1,34 @@
+@import 'src/styles/constants'
+	
+.autocomplete
+	position: absolute
+	left: 0
+	right: 0
+	top: 100%
+	background-color: white
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1)
+	border-radius: 15px
+	padding: 15px 0
+	display: flex
+	flex-direction: column
+
+	button.item
+		align-self: stretch
+		background: none
+		border: none
+		text-align: left
+		padding: 0 30px
+		display: flex
+		flex-direction: column
+		justify-content: center
+		height: 65px
+		.title
+			font-weight: 500	
+
+		.name
+			font-size: 0.9em
+			color: $gray
+			margin-top: 4px
+
+		&:hover
+			background-color: $lightest

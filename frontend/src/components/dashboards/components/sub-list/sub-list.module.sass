@@ -1,0 +1,55 @@
+@import 'src/styles/constants'
+
+.list
+	margin: 0
+	padding: 0
+
+	li
+		list-style-type: none
+		padding: 0
+		padding: 0 30px
+		font-weight: 500
+		
+		height: 65px
+		display: flex
+		align-items: center
+
+		.info
+			display: flex
+			flex-direction: column
+			justify-content: center
+			text-align: left
+
+		.sub
+			color: $gray
+			font-size: 0.8em
+			font-weight: 400
+			margin-top: 3px
+
+		.buttons
+			opacity: 0
+			transform: translateX(10px)
+			transition: opacity 0.1s, transform 0.1s
+		
+		&:hover
+			background-color: #F7F7F7
+			.buttons
+				opacity: 1
+				transform: none
+
+.buttons
+	margin-left: auto
+	button
+		background: none
+		border: none
+		width: 50px
+		height: 50px
+		color: $gray
+
+		&:hover
+			color: darken($gray, 15%)
+
+		svg
+			font-size: 22px
+	
+	

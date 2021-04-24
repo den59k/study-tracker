@@ -1,10 +1,13 @@
-import type { FastifyInstance, FastifyPluginOptions } from "fastify"
+import type { FastifyInstance } from "fastify"
 
 import cookie from 'fastify-cookie'
 
 import Model from "../model"
 
 import auth from './auth'
+import userPlugin from './plugins/user' 
+import rootRoutes from "./root"
+import teacherRoutes from "./teacher"
 
 export interface AppFastifyInstance extends FastifyInstance {
 	model: Model
@@ -17,8 +20,15 @@ export default async function app (fastify: AppFastifyInstance){
 	fastify.decorate('model', model)
 
 	fastify.register(cookie)
+	//Вот здесь проводится аутентификация токена
+	fastify.register(userPlugin)
 
+	//Подключаем первую пачку роутов с авторизацией
 	fastify.register(auth)
+	
+	//Подключаем все остальные роуты
+	fastify.register(rootRoutes, { prefix: '/root' })
+	fastify.register(teacherRoutes, { prefix: '/teacher' })
 
 	fastify.setErrorHandler(function (error, request, reply) {
 		if(error.validation){

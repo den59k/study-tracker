@@ -1,0 +1,61 @@
+@import 'src/styles/constants'
+
+.header
+	display: flex
+	align-items: center
+	padding: 22px 80px
+
+.tab, .title
+	font-size: 1.9em
+	font-weight: 700
+	color: $light-gray
+	text-decoration: none
+	margin-right: 1.2em
+	transition: color 0.2s
+
+	&.active
+		color: black
+
+.title
+	color: black
+
+.userInfo
+	margin-left: auto
+	flex: 0 0 auto
+	position: relative
+
+	&>button
+		display: flex
+		align-items: center
+		background: none
+		border: none
+
+	.info
+		text-align: right
+		.name 
+			font-weight: 500
+
+		.role
+			margin-top: 0.1em
+			color: $gray
+			font-size: 0.9em
+
+	img
+		width: 54px
+		height: 54px
+		border-radius: 30px
+		margin-left: 16px
+
+.back
+	background: none
+	border: 1px solid $light-gray
+	width: 38px
+	height: 38px
+	border-radius: 12px
+	margin-right: 25px
+
+	svg
+		font-size: 23px
+		width: 35px
+		vertical-align: middle
+		transform: translateY(0.3em)

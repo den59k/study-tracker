@@ -1,4 +1,4 @@
-import { mutate } from "swr"
+
 import { REST } from "./index"
 
 export function getRefreshToken(){
@@ -18,10 +18,7 @@ export async function authWithCredentials({ email, password }){
 
 export async function authWithToken (){
 
-	const data = {
-		refreshToken: getRefreshToken()
-	}
-
+	const data = { refreshToken: getRefreshToken()	}
 	if(!data.refreshToken) return null
 
 	const { refreshToken, userData, error } = await REST('/api/auth-token', data)
@@ -36,9 +33,22 @@ export async function authWithToken (){
 	return userData
 }
 
+export async function authCreateAccount ({token, password}){
+
+	const { refreshToken, userData, error } = await REST('/api/auth/confirm', { token, password }, 'PUT')
+
+	if(error)
+		return null
+	
+	localStorage.setItem('refreshToken', refreshToken)
+	return userData
+}
+
 export async function logout(){
-	const token = localStorage.getItem('refreshToken')
-	await REST('/api/auth', { token }, 'DELETE')
+
+	const data = { refreshToken: getRefreshToken()	}
+	if(!data.refreshToken) return null
+
+	await REST('/api/auth', data, 'DELETE')
 	localStorage.removeItem('refreshToken')
-	mutate('/api')
 } 

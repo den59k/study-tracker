@@ -14,3 +14,19 @@ export const authTokenSchema = getSchema({
 	},
 	required: [ 'refreshToken' ]
 })
+
+export const confirmSchema = getSchema({
+	properties: {
+		'token': { type: 'string' }
+	},
+	required: [ 'token' ]
+})
+
+
+export const confirmPasswordSchema = getSchema({
+	properties: {
+		'password': { type: 'string' },
+		'token': { type: 'string' }
+	},
+	required: [ 'password', 'token' ]
+})

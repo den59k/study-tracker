@@ -1,10 +1,12 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 
 export { default as Input } from './input'
 export { default as Button } from './button'
+export { default as SegmentButton } from './segment-button'
 
 export function useForm(defaultValues){
-	const [ formData, setFormData ] = useState(defaultValues || {})
+
+	const [ formData, setFormData ] = useState(() => (defaultValues || {}))
 	const [ errors, setErrors ] = useState({})
 
 	const onChange = useMemo(() => (value, key) => {
@@ -22,7 +24,7 @@ export function useForm(defaultValues){
 		setFormData(formData => ({ ...formData, [key]: value }))
 	}, [ setFormData, setErrors ])
 
-	const clear = useMemo(() => {
+	const clear = useCallback(() => {
 		setFormData({})
 	}, [ setFormData ])
 

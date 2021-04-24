@@ -1,17 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AuthProvider } from 'providers/auth';
+
 import 'styles/global.sass'
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { AuthProvider } from 'providers/auth';
+import { RouterProvider } from 'providers/router';
+import { ModalWindowProvider } from 'providers/modal-window'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		<ModalWindowProvider>
+			<AuthProvider>
+				<RouterProvider>
+					<App />
+				</RouterProvider>
+			</AuthProvider>
+		</ModalWindowProvider>
+	</React.StrictMode>,
+	document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

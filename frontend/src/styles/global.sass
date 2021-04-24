@@ -2,3 +2,28 @@
 @import common
 @import typography
 
+body
+	background-color: $bkg
+
+
+.page
+	width: 100vw
+	height: 100vh
+	display: flex
+	flex-direction: column
+
+.btn
+	background: none
+	border: none
+	text-transform: uppercase
+	color: $primary
+	font-weight: 500
+	min-height: 60px
+	font-size: 0.95em
+	svg
+		font-size: 35px
+		color: $primary
+		transform: translateY(0.05em)
+
+.red
+	color: $error

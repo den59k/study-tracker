@@ -1,8 +1,8 @@
 import dotenv from 'dotenv'
+dotenv.config()
+
 import fastify from 'fastify'
 import app from './src/app'
-
-dotenv.config()
 
 const server = fastify()
 //Добавляем всё наше приложение к fastify

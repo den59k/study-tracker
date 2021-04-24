@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { authWithToken, authWithCredentials } from "services/auth";
+import { authWithToken, authWithCredentials, logout, authCreateAccount } from "services/auth";
 
 export default class AuthStore {
 	
@@ -38,6 +38,27 @@ export default class AuthStore {
 		if(!userData)
 			return error || { login: "Произошла ошибка" }
 
+	}
+
+	async confirmAccount ({token, password}){
+		const userData = await authCreateAccount({token, password})
+
+		runInAction(() => {
+			if(userData){
+				this.status = 'authorized'
+				this.userData = userData
+			}
+		})
+		if(!userData)
+			return { password: "Произошла ошибка" }
+	}
+
+	async logout(){
+		await logout()
+		runInAction(() => {
+			this.userData = null
+			this.status = 'not-authorized'
+		})
 	}
 	
 }

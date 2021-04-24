@@ -1,6 +1,7 @@
 import { useForm, getProps, Input, Button } from 'components/controls'
 import Planet from 'components/decoration/planet'
 import { useAuth } from 'providers/auth'
+import { useRouter } from 'providers/router'
 
 import styles from './auth-page.module.sass'
 
@@ -8,6 +9,7 @@ function AuthPage (){
 
 	const auth = useAuth()
 	const form = useForm()
+	const router = useRouter()
 	
 	const onSubmit = (e) => {
 		e.preventDefault()
@@ -16,6 +18,7 @@ function AuthPage (){
 		if(!form.get('password')) return form.setErrors({password: "Введите пароль от аккаунта"})
 		
 		auth.tryLoginWithCredentials(form.formData).then((err) => {
+			router.push('/')
 			if(err) form.setErrors(err)
 		})
 	}
